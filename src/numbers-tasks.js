@@ -125,7 +125,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-  return String(value)[String(value).length - 1];
+  return value % 10;
 }
 
 /**
@@ -420,7 +420,7 @@ function toPrecision(number, precision) {
  * Number(-5)    => -5
  */
 function getNumberValue(number) {
-  return number;
+  return number.valueOf();
 }
 
 /**
@@ -454,7 +454,10 @@ function isNumber(number) {
  * '5'  => false
  */
 function isInteger(number) {
-  return !!(number % 1 === 0 && typeof number === 'number');
+  if (Number.isInteger(number)) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -468,7 +471,7 @@ function isInteger(number) {
  * 'abcdefgh'      => NaN
  */
 function getFloatOnString(str) {
-  return parseFloat(str);
+  return Number.parseFloat(str);
 }
 
 /**
@@ -486,7 +489,7 @@ function getFloatOnString(str) {
  * '10', 8              => 8
  */
 function getIntegerOnString(str, base) {
-  return parseInt(str, base);
+  return Number.parseInt(str, base);
 }
 
 /**
@@ -591,7 +594,7 @@ function getSumOfNumbers(x1, x2, x3) {
  * 0, 5   => 5
  */
 function getMaxNumber(firstNumber, secondNumber) {
-  return firstNumber >= secondNumber ? firstNumber : secondNumber;
+  return Math.max(firstNumber, secondNumber);
 }
 
 /**
@@ -639,13 +642,16 @@ function getHypotenuse(a, b) {
  * 15 => 8
  */
 function getCountOfOddNumbers(number) {
-  let a = 0;
-  for (let i = 0; i < number; i += 1) {
+  let i = 1;
+  let count = 0;
+
+  while (i <= Math.abs(number)) {
     if (i % 2 !== 0) {
-      a += 1;
+      count += 1;
     }
+    i += 1;
   }
-  return a;
+  return count;
 }
 
 module.exports = {
